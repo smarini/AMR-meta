@@ -19,7 +19,9 @@ MetAMR is an ensemble of AMR class-specific models based on [MEGARes](https://me
 * Tetracyclines
 
 # Principles
-MetAMR is based on multiple binary models. Each class has _two_ models, one based on _k_-mers and LASSO logistic regression, and one based on metafeatures (obtained by _k_-mers matrix factorization) and ridge logistic regression.
+MetAMR is based on multiple binary models, one per AMR class. Each class has _two_ models
+* one based on _k_-mers and LASSO logistic regression
+* one based on metafeatures (obtained by _k_-mers matrix factorization) and ridge logistic regression
 
 # Installation
 To install MetAMR, simply download this repository and run:
@@ -39,7 +41,7 @@ MetAMR is developed in Linux, ad utilizes Bash, C++, and R, with packages `Matri
         -p	# of cores for parallel computing, defaults to 1
 
         example of use:
-        $0 -a data/example/example_R1.fastq \\
+        ./MetAMR -a data/example/example_R1.fastq \\
                 -b data/example/example_R2.fastq \\
                 -o output \\
                 -p 4
@@ -60,6 +62,6 @@ For each short read pair, MetAMR will output a probability for each model of the
 Here, each line corresponds to a read pair in the input fastq files (same order).
 
 # References:
-* [Doster E, et al. MEGARes 2.0: a database for classification of antimicrobial drug, biocide and metal resistance determinants in metagenomic sequence data.](https://academic.oup.com/nar/article/48/D1/D561/5624973)
+* [Doster E, et al. "MEGARes 2.0: a database for classification of antimicrobial drug, biocide and metal resistance determinants in metagenomic sequence data." NAR 2019](https://academic.oup.com/nar/article/48/D1/D561/5624973)
 * [Marini S., et al. "Protease target prediction via matrix factorization." Bioinformatics (2018).](https://doi.org/10.1093/bioinformatics/bty746)
 * [Vitali F., et al. "Patient similarity by joint matrix trifactorization to identify subgroups in acute myeloid leukemia." JAMIA Open (2018).](https://doi.org/10.1093/jamiaopen/ooy008)
