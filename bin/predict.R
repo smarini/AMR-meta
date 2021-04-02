@@ -1,6 +1,9 @@
 check_packages <- c("Matrix", "stringr", "glmnet")
 not_present <- check_packages[!(check_packages %in% installed.packages()[,"Package"])]
-if(length(not_present)) install.packages(not_present)
+if(length(not_present)){
+  "Some of the packages MetAMR requires are not installed. Proceeding with installation now..."
+  install.packages(not_present)
+  }
 
 library(Matrix)
 library(stringr)

@@ -11,9 +11,10 @@ usage() { echo "Usage: $0
         $0 -a data/example/example_R1.fastq \\
                 -b data/example/example_R2.fastq \\
                 -o output \\
-                -p 4
+                -p 4" 1>&2; exit 1; }
 
-" 1>&2; exit 1; }
+# check if R works
+command -v Rscript >/dev/null 2>&1 || { echo >&2 "It is not possbile to run Rscript. Please install R."; exit 1;}
 
 date
 
