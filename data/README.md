@@ -21,4 +21,4 @@ Sequences used for PSS\_class come form PATRIC genomes. First we remove genomes 
 # Metagenomics datasets
 The two real-world datasets come from functional metagenomics experiments previously used as external benchmark for the Meta-MARC tool, referred as the 'Pediatric' and the 'Soil' datasets (NCBI BioProject Accessions PRJNA244044 and PRJNA215106). We randomly select 100,000 short read pairs for each class as for the PATRIC datasets.
 
-* Selected short read pairs are listed in `metagnomics_short_reads.tar.xz`
+* Selected short read pairs are listed in `metagenomics_short_reads.tar.xz`
