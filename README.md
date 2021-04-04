@@ -30,18 +30,18 @@ make
 ```
 
 ## Dependencies
-MetAMR is developed in Linux, ad utilizes Bash, C++, and R, with packages `Matrix`, `stringr`, `glmnet`. Please note that if the packages are not found, MetAMR will install them automatically.
+MetAMR is developed in Linux, ad utilizes Bash, C++, and R, with packages `Matrix`, `stringr`, `glmnet`. Pealse make sure the dependencies are installed before running MetAMR.
 
 # Usage
 ```
-./MetAMR -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p 1
+./MetAMR.sh -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p 1
 	-a	short read R1 file [fastq]
         -b	short read R2 file [fastq]
         -o	output directory, defaults to output
         -p	# of cores for parallel computing, defaults to 1
 
         example of use:
-        ./MetAMR -a data/example/example_R1.fastq \\
+        ./MetAMR.sh -a data/example/example_R1.fastq \\
                 -b data/example/example_R2.fastq \\
                 -o output \\
                 -p 4

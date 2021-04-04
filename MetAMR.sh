@@ -16,6 +16,12 @@ usage() { echo "Usage: $0
 # check if R works
 command -v Rscript >/dev/null 2>&1 || { echo >&2 "It is not possbile to run Rscript. Please install R."; exit 1;}
 
+# check if needed R packages are installed
+Rscript bin/check_packages.R
+if  [ $? == 1 ]; then
+  exit 1;
+fi
+
 date
 
 prog=$(readlink -f $0)
@@ -74,18 +80,18 @@ date
 echo "Predicting..." >>/dev/stderr
 
 n=$(($(ls ${o}/tmp/ | wc -l)-1))
-echo files = ${n} >>/dev/stderr
-echo cpus = ${p}  >>/dev/stderr
 for chunk in $(seq 0 $p $n); do
-  echo chunk ${chunk}
+  echo "Processing chunk ${chunk}" >>/dev/stderr
   for cpu in $(seq 0 $(($p-1))); do
-    Rscript ${progdir}/bin/predict.R ${progdir} ${o}/tmp/sparse_features_$(($cpu+$chunk)).csv ${o} &
+    if [ -f "${o}/tmp/sparse_features_$(($cpu+$chunk)).csv" ]; then
+      Rscript ${progdir}/bin/predict.R ${progdir} ${o}/tmp/sparse_features_$(($cpu+$chunk)).csv ${o} &
+    fi
     done
     wait
   done
 
 # remove tmp data
-rm -rf ${o}/tmp
+ rm -rf ${o}/tmp
 
 date
 

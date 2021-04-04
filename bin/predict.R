@@ -1,10 +1,3 @@
-check_packages <- c("Matrix", "stringr", "glmnet")
-not_present <- check_packages[!(check_packages %in% installed.packages()[,"Package"])]
-if(length(not_present)){
-  "Some of the packages MetAMR requires are not installed. Proceeding with installation now..."
-  install.packages(not_present)
-  }
-
 library(Matrix)
 library(stringr)
 library(glmnet)
@@ -16,7 +9,6 @@ progdir = args[1] # base directory
 in_file = args[2]  # index of the feature file
 outdir = args[3]  # output directory
 
-message(in_file)
 sparse_features = scan(in_file, sep = '\n', what = 'integer')  # read indeces of 1s to build sparse binary matrix
 
 get_coordinates <- function(x) {  # function to convert indeces in the right format x,y
@@ -71,7 +63,6 @@ for (i in 1:length(classes)){
 colnames(predictions_kmer) = classes
 
 message(in_file)
-in_file = str_split(in_file, '_')[[1]][4]
-message(in_file)
+in_file = str_split(in_file, '_')[[1]][3]
 write.table(predictions_kmer, file = paste0(outdir, '/kmer_predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
 write.table(predictions_metaf, file = paste0(outdir, '/metaf.predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
