@@ -1,7 +1,7 @@
-# MetAMR
+# AMR-meta
 
-MetAMR is a machine-learning method to predict class-specific antimicrobial resistance (AMR) in metagenomics short read pairs (FASTQ).
-MetAMR is an ensemble of AMR class-specific models based on [MEGARes](https://megares.meglab.org/) classes.
+AMR-meta is a machine-learning method to predict class-specific antimicrobial resistance (AMR) in metagenomics short read pairs (FASTQ).
+AMR-meta is an ensemble of AMR class-specific models based on [MEGARes](https://megares.meglab.org/) classes.
 
 ## Considered AMR Classes
 * Aminoglycosides
@@ -19,36 +19,36 @@ MetAMR is an ensemble of AMR class-specific models based on [MEGARes](https://me
 * Tetracyclines
 
 # Principles
-MetAMR is based on multiple binary models, one per AMR class. Each class has _two_ models
+AMR-meta is based on multiple binary models, one per AMR class. Each class has _two_ models
 * one based on _k_-mers and LASSO logistic regression
 * one based on metafeatures (obtained by _k_-mers matrix factorization) and ridge logistic regression
 
 # Installation
-To install MetAMR, simply download this repository and run:
+To install AMR-meta, simply download this repository and run:
 ```
 make
 ```
 
 ## Dependencies
-MetAMR is developed in Linux, ad utilizes Bash, C++, and R, with packages `Matrix`, `stringr`, `glmnet`. Pealse make sure the dependencies are installed before running MetAMR.
+AMR-meta is developed in Linux, ad utilizes Bash, C++, and R, with packages `Matrix`, `stringr`, `glmnet`. Pealse make sure the dependencies are installed before running AMR-meta.
 
 # Usage
 ```
-./MetAMR.sh -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p 1
+./AMR-meta.sh -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p 1
 	-a	short read R1 file [fastq]
         -b	short read R2 file [fastq]
         -o	output directory, defaults to output
         -p	# of cores for parallel computing, defaults to 1
 
         example of use:
-        ./MetAMR.sh -a data/example/example_R1.fastq \\
+        ./AMR-meta.sh -a data/example/example_R1.fastq \\
                 -b data/example/example_R2.fastq \\
                 -o output \\
                 -p 4
 ```
 
 # Output
-For each short read pair, MetAMR will output a probability for each model of the read pair of being labeled as resistant. An example of output file is the following:
+For each short read pair, AMR-meta will output a probability for each model of the read pair of being labeled as resistant. An example of output file is the following:
 
  | Aminoglycosides | betalactams | Drug and biocide resistance | Fluoroquinolones | Glycopeptides | Lipopeptides | MLS | Multi-biocide resistance | Multi-drug resistance | Multi-metal resistance | Phenicol | Sulfonamides | Tetracyclines | 
  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  | ---   |

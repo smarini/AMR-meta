@@ -14,7 +14,7 @@ int main (int argc, char** argv)
   std::ifstream file_kmers_rc(argv[5]);
   
   while (std::getline(file_kmers, single_kmer)){
-  ref_kmers.push_back(single_kmer);
+    ref_kmers.push_back(single_kmer);
     }
   
   while (std::getline(file_kmers_rc, single_kmer)){
@@ -36,7 +36,7 @@ int main (int argc, char** argv)
   const unsigned int l_ref=138260;
   unsigned int l=2; // fastq line counter
   const unsigned int max_pairs_per_file = 500000;
-  unsigned int file_index=0;	// chop output into files with 100K short read pairs max
+  unsigned int file_index=0;	// chop output into files with 500K short read pairs max
   
   while (std::getline(file_1, str_1)){
     std::getline(file_2, str_2);
