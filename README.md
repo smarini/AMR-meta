@@ -29,32 +29,32 @@ To install AMR-meta, download this repository and run:
 ```
 make
 ```
-AMR-meta uses the following R packages: `Matrix`, `stringr`, `glmnet`. Please make sure these R packages are installed before running.
+AMR-meta uses the following R packages: `Matrix`, `stringr`, `glmnet`. AMR-meta will check if these R packages are installed before running.
 
 ## Singularity
-AMR-meta is available as Singularity container, downloadable from xxx.
+AMR-meta is available as Singularity container, downloadable from genome.ufl.edu.
 
 # Usage
-Command line, bash:
 ```
-./AMR-meta.sh -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p 1
+./AMR-meta.sh -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p NCORES
 	-a	short read R1 file [fastq]
         -b	short read R2 file [fastq]
         -o	output directory, defaults to output
         -p	# of cores for parallel computing, defaults to 1
+        
+Singularity:
+singularity run amrmeta.sif -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p NCORES
 
-        example of use:
+        examples of use:
         ./AMR-meta.sh -a data/example/example_R1.fastq \\
                 -b data/example/example_R2.fastq \\
                 -o output \\
                 -p 4
-```
-Command line, Singularity:
-```
-singularity run \
---env a=<short read R1 file [fastq]> --end b=<short read R2 file [fastq]> \
---env o=<output directory, defaults to output> --env p=<# of cores for parallel computing, defaults to 1> \
-  amrmeta.sif
+                
+        singularity run amrmeta.sif -a data/example/example_R1.fastq \\
+                -b data/example/example_R2.fastq \\
+                -o output \\
+                -p 4
 ```
 
 # Output

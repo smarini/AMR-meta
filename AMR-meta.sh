@@ -1,23 +1,35 @@
 #!/bin/bash
 
-usage() { echo "Usage: $0
+usage() { echo "
+********************************************
+
+Usage: $0 
+
+$0 -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p NCORES
 
         -a	short read R1 file [fastq]
         -b	short read R2 file [fastq]
         -o	output directory, defaults to output
         -p	# of cores for parallel computing, defaults to 1
 
-        example of use:
-        $0 -a data/example/example_R1.fastq \\
+Singularity:
+singularity run amrmeta.sif -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p NCORES
+
+********************************************
+
+        examples of use:
+        ./AMR-meta.sh -a data/example/example_R1.fastq \\
                 -b data/example/example_R2.fastq \\
                 -o output \\
                 -p 4
-
-Command line, Singularity:
-singularity run \\
---env a=<short read R1 file [fastq]> --end b=<short read R2 file [fastq]> \\
---env o=<output directory, defaults to output> --env p=<# of cores for parallel computing, defaults to 1> \\
-  amrmeta.sif" 1>&2; exit 1; }
+                
+        singularity run amrmeta.sif -a data/example/example_R1.fastq \\
+                -b data/example/example_R2.fastq \\
+                -o output \\
+                -p 4
+                
+********************************************
+  " 1>&2; exit 1; }
 
 
 prog=$(readlink -f $0)
