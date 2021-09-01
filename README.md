@@ -32,7 +32,7 @@ make
 AMR-meta uses the following R packages: `Matrix`, `stringr`, `glmnet`. AMR-meta will check if these R packages are installed before running.
 
 ## Singularity
-AMR-meta is available as Singularity container, downloadable from genome.ufl.edu.
+AMR-meta is available as a Singularity container, downloadable from [genome.ufl.edu](http://genome.ufl.edu/download/amrmeta.sif).
 
 # Usage
 ```
@@ -46,14 +46,14 @@ Singularity:
 singularity run amrmeta.sif -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p NCORES
 
         examples of use:
-        ./AMR-meta.sh -a data/example/example_R1.fastq \\
-                -b data/example/example_R2.fastq \\
-                -o output \\
+        ./AMR-meta.sh -a data/example/example_R1.fastq \
+                -b data/example/example_R2.fastq \
+                -o output \
                 -p 4
                 
-        singularity run amrmeta.sif -a data/example/example_R1.fastq \\
-                -b data/example/example_R2.fastq \\
-                -o output \\
+        singularity run amrmeta.sif -a data/example/example_R1.fastq \
+                -b data/example/example_R2.fastq \
+                -o output \
                 -p 4
 ```
 
