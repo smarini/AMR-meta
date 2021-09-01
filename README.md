@@ -32,7 +32,7 @@ make
 AMR-meta uses the following R packages: `Matrix`, `stringr`, `glmnet`. AMR-meta will check if these R packages are installed before running.
 
 ## Singularity
-AMR-meta is available as a Singularity container, downloadable from [genome.ufl.edu](http://genome.ufl.edu/download/amrmeta.sif).
+AMR-meta is available as a [Singularity](https://github.com/sylabs/singularity/releases) container, downloadable from [http://genome.ufl.edu/download/amrmeta.sif](http://genome.ufl.edu/download/amrmeta.sif).
 
 # Usage
 ```
@@ -76,6 +76,9 @@ Here, each line corresponds to a read pair in the input fastq files (same order)
 * [Marini S., et al. "Protease target prediction via matrix factorization." Bioinformatics (2018).](https://doi.org/10.1093/bioinformatics/bty746)
 * [Vitali F., et al. "Patient similarity by joint matrix trifactorization to identify subgroups in acute myeloid leukemia." JAMIA Open (2018).](https://doi.org/10.1093/jamiaopen/ooy008)
 
+# A thank you note
+The AMR-meta team is deeply thankful to [Alberto Riva](https://github.com/albertoriva) and [UF ICBR](https://biotech.ufl.edu/) for kindly hosting the AMR-meta Singularity image.
+
 ### MIT License
 
 Copyright (c) [2021] [Simone Marini et al.]
@@ -97,3 +100,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
