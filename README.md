@@ -1,7 +1,6 @@
 # AMR-meta
 
-AMR-meta is a machine-learning method to predict class-specific antimicrobial resistance (AMR) in metagenomics short read pairs (FASTQ).
-AMR-meta is an ensemble of AMR class-specific models based on [MEGARes](https://megares.meglab.org/) classes.
+AMR-meta is a machine-learning method to predict class-specific antimicrobial resistance (AMR) in metagenomics short read pairs (FASTQ). AMR-meta is an ensemble of AMR class-specific models based on [MEGARes](https://megares.meglab.org/) classes. AMR-meta is developed in Linux, ad utilizes Bash, C++, and R.
 
 ## Considered AMR Classes
 * Aminoglycosides
@@ -24,15 +23,19 @@ AMR-meta is based on multiple binary models, one per AMR class. Each class has _
 * one based on metafeatures (obtained by _k_-mers matrix factorization) and ridge logistic regression
 
 # Installation
-To install AMR-meta, simply download this repository and run:
+
+## Makefile
+To install AMR-meta, download this repository and run:
 ```
 make
 ```
+AMR-meta uses the following R packages: `Matrix`, `stringr`, `glmnet`. Please make sure these R packages are installed before running.
 
-## Dependencies
-AMR-meta is developed in Linux, ad utilizes Bash, C++, and R, with packages `Matrix`, `stringr`, `glmnet`. Pealse make sure the dependencies are installed before running AMR-meta.
+## Singularity
+AMR-meta is available as Singularity container, downloadable from xxx.
 
 # Usage
+Command line, bash:
 ```
 ./AMR-meta.sh -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p 1
 	-a	short read R1 file [fastq]
@@ -46,6 +49,13 @@ AMR-meta is developed in Linux, ad utilizes Bash, C++, and R, with packages `Mat
                 -o output \\
                 -p 4
 ```
+Command line, Singularity:
+```
+singularity run \
+--env a=<short read R1 file [fastq]> --end b=<short read R2 file [fastq]> \
+--env o=<output directory, defaults to output> --env p=<# of cores for parallel computing, defaults to 1> \
+  amrmeta.sif
+```
 
 # Output
 For each short read pair, AMR-meta will output a probability for each model of the read pair of being labeled as resistant. An example of output file is the following:
@@ -54,7 +64,7 @@ For each short read pair, AMR-meta will output a probability for each model of t
  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  | ---   |
  | 0.302 | 0.065 | 0.494 | 0.017 | 0.392 | 0.251 | 0.434 | 0.398 | 0.474 | 0.488 | 0.120 | 0.546 | 0.194 | 
  | 0.302 | 0.065 | 0.494 | 0.040 | 0.322 | 0.251 | 0.434 | 0.398 | 0.091 | 0.211 | 0.167 | 0.530 | 0.308 | 
- | 0.999 | 6.382 | 0.001 | 0.012 | 0.000 | 0.051 | 0.001 | 0.015 | 0.800 | 0.678 | 0.104 | 0.003 | 0.275 | 
+ | 0.999 | 0.382 | 0.001 | 0.012 | 0.000 | 0.051 | 0.001 | 0.015 | 0.800 | 0.678 | 0.104 | 0.003 | 0.275 | 
  | 0.302 | 0.065 | 0.496 | 0.040 | 0.392 | 0.511 | 0.434 | 0.398 | 0.474 | 0.678 | 0.104 | 0.003 | 0.275 | 
  | 0.302 | 0.065 | 0.494 | 0.040 | 0.385 | 0.717 | 0.117 | 0.434 | 0.398 | 0.678 | 0.104 | 0.003 | 0.275 | 
  | 0.302 | 0.065 | 0.494 | 0.063 | 0.392 | 0.007 | 0.965 | 0.251 | 0.434 | 0.398 | 0.474 | 0.488 | 0.137 | 

@@ -11,21 +11,28 @@ usage() { echo "Usage: $0
         $0 -a data/example/example_R1.fastq \\
                 -b data/example/example_R2.fastq \\
                 -o output \\
-                -p 4" 1>&2; exit 1; }
+                -p 4
+
+Command line, Singularity:
+singularity run \\
+--env a=<short read R1 file [fastq]> --end b=<short read R2 file [fastq]> \\
+--env o=<output directory, defaults to output> --env p=<# of cores for parallel computing, defaults to 1> \\
+  amrmeta.sif" 1>&2; exit 1; }
+
+
+prog=$(readlink -f $0)
+progdir=$(dirname $prog)
 
 # check if R works
 command -v Rscript >/dev/null 2>&1 || { echo >&2 "It is not possbile to run Rscript. Please install R."; exit 1;}
 
 # check if needed R packages are installed
-Rscript bin/check_packages.R
+Rscript ${progdir}/bin/check_packages.R
 if  [ $? == 1 ]; then
   exit 1;
 fi
 
 date
-
-prog=$(readlink -f $0)
-progdir=$(dirname $prog)
 
 # init
 p=1; a=""; b=""; o=output
