@@ -86,7 +86,7 @@ if [ ! -f ${a} ] || [ ! -f ${b} ] || [ -z ${a} ] || [ -z ${b} ]; then
 fi
 
 # make sure to remove partial results of old/interrupted runs
-if [ -d ${o}/tmp ]; then rm -rf ${o}/tmp/*; fi
+if [ -d ${o}/tmp ]; then \rm -rf ${o}/tmp/*; fi
 
 mkdir -p ${o}/tmp
 
@@ -110,7 +110,11 @@ for chunk in $(seq 0 $p $n); do
   done
 
 # remove tmp data
- rm -rf ${o}/tmp
+ \rm ${o}/tmp
+ cat ${o}/kmer_predictions_*.csv > ${o}/kmer_predictions.csv
+ cat ${o}/kmer_predictions_*.csv > ${o}/metaf_predictions.csv
+ \rm ${o}/kmer_predictions_*.csv
+ \rm ${o}/kmer_predictions_*.csv
 
 date
 

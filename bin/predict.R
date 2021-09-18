@@ -61,8 +61,9 @@ for (i in 1:length(classes)){
   predictions_metaf = cbind(predictions_metaf, predict(cv.fit.ridge, newx = metaf_data, type="response"))
 }
 colnames(predictions_kmer) = classes
+colnames(predictions_metaf) = classes
 
 message(in_file)
 in_file = str_split(in_file, '_')[[1]][3]
-write.table(predictions_kmer, file = paste0(outdir, '/kmer_predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
-write.table(predictions_metaf, file = paste0(outdir, '/metaf.predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
+write.table(format(predictions_kmer, digits=4), file = paste0(outdir, '/kmer_predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
+write.table(format(predictions_metaf, digits=4), file = paste0(outdir, '/metaf_predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
