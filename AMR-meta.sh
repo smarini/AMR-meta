@@ -110,11 +110,7 @@ for chunk in $(seq 0 $p $n); do
   done
 
 # remove tmp data
- \rm ${o}/tmp
- cat ${o}/kmer_predictions_*.csv > ${o}/kmer_predictions.csv
- cat ${o}/kmer_predictions_*.csv > ${o}/metaf_predictions.csv
- \rm ${o}/kmer_predictions_*.csv
- \rm ${o}/kmer_predictions_*.csv
+ rm -rf ${o}/tmp
 
 date
 

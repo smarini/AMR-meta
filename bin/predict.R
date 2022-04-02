@@ -63,7 +63,7 @@ for (i in 1:length(classes)){
 colnames(predictions_kmer) = classes
 colnames(predictions_metaf) = classes
 
-message(in_file)
+# message(in_file)
 in_file = str_split(in_file, '_')[[1]][3]
 write.table(format(predictions_kmer, digits=4), file = paste0(outdir, '/kmer_predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
 write.table(format(predictions_metaf, digits=4), file = paste0(outdir, '/metaf_predictions_', in_file), sep = ',', quote = FALSE, row.names = FALSE)
