@@ -1,6 +1,8 @@
 #!/bin/bash
 
-usage() { echo "
+usage() { 
+
+echo "
 ********************************************
 
 Usage: $0 
@@ -29,22 +31,13 @@ singularity run amrmeta.sif -a FASTQ_R1 -b FASTQ_R2 -o OUT_DIR -p NCORES
                 -p 4
                 
 ********************************************
-  " 1>&2; exit 1; }
+  " 1>&2 
+  exit 1
+}
 
-
-prog=$(readlink -f $0)
-progdir=$(dirname $prog)
-
-# check if R works
-command -v Rscript >/dev/null 2>&1 || { echo >&2 "It is not possbile to run Rscript. Please install R."; exit 1;}
-
-# check if needed R packages are installed
-Rscript ${progdir}/bin/check_packages.R
-if  [ $? == 1 ]; then
-  exit 1;
-fi
-
-date
+msg() {
+  echo "[$(date +"%x %X")] $*" >> /dev/stderr
+}
 
 # init
 p=1; a=""; b=""; o=output
@@ -70,33 +63,46 @@ while getopts "a:b:o:p:" opts; do
     esac
 done
 
+msg "Initializing"
+
+# check if R works
+command -v Rscript >/dev/null 2>&1 || { echo >&2 "It is not possbile to run Rscript. Please install R."; exit 1;}
+
 prog=$(readlink -f $0)
 progdir=$(dirname $prog)
 
+# check if needed R packages are installed
+Rscript ${progdir}/bin/check_packages.R
+if  [ $? == 1 ]; then
+  exit 1;
+fi
+
+if [[ -z $a ]] || [[ -z $b ]];
+then
+  usage
+fi
+
 # print recap input files
+echo "Running: ${progdir}" >>/dev/stderr
 echo "R1 file = ${a}" >>/dev/stderr
 echo "R2 file = ${b}" >>/dev/stderr
-echo "output directory = ${o}" >>/dev/stderr
-echo "progdir = ${progdir}" >>/dev/stderr
+echo "Output directory = ${o}" >>/dev/stderr
 
-if [ ! -f ${a} ] || [ ! -f ${b} ] || [ -z ${a} ] || [ -z ${b} ]; then
+if [[ ! -f ${a} ]] || [[ ! -f ${b} ]]; then
     echo "Cannot proceed. R1 and/or R2 files not present."
-    usage
-    exit 0
+    exit 1
 fi
 
 # make sure to remove partial results of old/interrupted runs
-if [ -d ${o}/tmp ]; then \rm -rf ${o}/tmp/*; fi
+if [[ -d ${o}/tmp ]]; then rm -rf ${o}/tmp/*; fi
 
 mkdir -p ${o}/tmp
 
 # detect kmers and produce index file
-echo "Detecting kmers..." >>/dev/stderr
+msg "Detecting kmers..."
 ${progdir}/bin/prep_features ${a} ${b} ${o}/tmp/sparse_features $progdir/data/kmers_per_cpp.txt $progdir/data/kmers_per_cpp_rc.txt
 
-date
-
-echo "Predicting..." >>/dev/stderr
+msg "Predicting..."
 
 n=$(($(ls ${o}/tmp/ | wc -l)-1))
 for chunk in $(seq 0 $p $n); do
@@ -112,5 +118,5 @@ for chunk in $(seq 0 $p $n); do
 # remove tmp data
  rm -rf ${o}/tmp
 
-date
+msg "Done."
 
